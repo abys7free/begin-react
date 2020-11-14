@@ -1,3 +1,4 @@
+```jsx
 import React, {useRef, useState} from 'react';
 import CreateUser from './CreateUser';
 import UserList from './UserList';
@@ -22,20 +23,17 @@ function App() {
     {
         id: 1,
         username: 'velopert',
-        email: 'public.velopert@gamil.com',
-        active: true
+        email: 'public.velopert@gamil.com'
     },
     {
         id: 2,
         username: 'tester',
-        email: 'tester@gamil.com',
-        active: false
+        email: 'tester@gamil.com'
     },
     {
         id: 3,
         username: 'liz',
-        email: 'liz@gamil.com',
-        active: false
+        email: 'liz@gamil.com'
     },
   ]);
   const nextId = useRef(4);
@@ -46,8 +44,8 @@ function App() {
       username: username,
       email: email
     }
-    setUsers(users.concat(user));
-    // setUsers([...users, user]);
+    // setUsers(users.concat(user)); 도 가능
+    setUsers([...users, user]);
     setInputs({
       username: '',
       email: ''
@@ -56,25 +54,15 @@ function App() {
     console.log(nextId.current);
     nextId.current += 1;
   }
-  const onRemove = (id) => {
-    setUsers(users.filter(user => user.id !== id));
-  }
-
-  const onToggle = id => {
-    setUsers(users.map(
-      user => user.id === id
-      ? {...user, active: !user.active}
-      : user
-    ))
-  }
-
 
   return (
     <>
       <CreateUser username={username} email={email} onChange={onChange} onCreate={onCreate}/>
-      <UserList users={users} onRemove={onRemove} onToggle={onToggle}/>
+      <UserList users={users}/>
     </>
   );
 }
 
 export default App;
+
+```
