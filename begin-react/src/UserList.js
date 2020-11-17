@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-function User({ user , onRemove, onToggle }){
+const User = React.memo(function User({ user , onRemove, onToggle }){
     const { username, email, id, active} = user;
     // 이렇게하면 전체 리렌더링된다. 이렇게 하면 안된다.
     useEffect(() => {
@@ -21,8 +21,8 @@ function User({ user , onRemove, onToggle }){
         {/* 화살표 함수 안쓰면 다 최초 렌더링때 삭제 */}
         &nbsp;
         <button onClick={()=> onRemove(id)}>삭제</button>
-    </div>)
-}
+    </div>);
+});
 
 function UserList({ users,  onRemove, onToggle}) {
     
@@ -43,4 +43,5 @@ function UserList({ users,  onRemove, onToggle}) {
     )
 }
 
-export default UserList;
+export default React.memo(UserList);
+// UserList, (prevProps, nextProps) => nextProps.users === pervProps.users
